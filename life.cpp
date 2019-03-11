@@ -79,14 +79,16 @@ void life::nextGeneration(){
 
 void life::paintEvent(QPaintEvent *event){
     QPainter paint(this);
+    QColor amber(255, 191, 0); //r:255 g:191 b:0 gives amber
+    QColor dark_amber(136, 48, 0); //r:136 g:48 b:0 gives dark amber
     for(size_t i = 0; i < max_sz; ++i){ //iterate over every cell
         for(size_t j = 0; j < max_sz; ++j){
             QRectF cell(getCoord(i), getCoord(j), cell_sz, cell_sz); //calculate the rectangle to fill for the cell
             if(cells[i][j]){ //if the cell is living
-                paint.fillRect(r, QBrush(255, 191, 0)); //r:255 g:191 b:0 gives amber
+                paint.fillRect(cell, QBrush(amber)); //paint living cells amber
             }
             else{ //the cell is not living
-                paint.fillRect(r, QBrush(136, 48, 0)); //r:136 g:48 b:0 gives dark amber
+                paint.fillRect(cell, QBrush(dark_amber)); //paint nonliving cells dark amber
             }
         }
     }

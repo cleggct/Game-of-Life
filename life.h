@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPaintEvent>
+#include <QPainter>
 #include <ctime>
 
 namespace Ui {
