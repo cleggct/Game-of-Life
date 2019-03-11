@@ -77,6 +77,14 @@ void life::nextGeneration(){
     }
 }
 
+size_t life::getIndex(int c){
+    return (size_t) c / cell_sz; //compute the index corresponding to the given coordinate
+}
+
+int life::getCoord(size_t i){
+    return (int)
+}
+
 life::~life()
 {
     delete ui;

@@ -36,7 +36,7 @@ private:
     bool cells[max_sz][max_sz]; //the game world
 
     size_t getIndex(int c); //will take a coordinate and give the corresponding index of cells[][]
-    int getCoord(int i); //will take an index of cells[][] and give the corresponding coordinate for drawing
+    int getCoord(size_t i); //will take an index of cells[][] and give the corresponding coordinate for drawing
 };
 
 #endif // LIFE_H
