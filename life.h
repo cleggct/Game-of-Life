@@ -3,8 +3,7 @@
 
 #include <QWidget>
 #include <QPaintEvent>
-#include <QPainter>
-#include <ctime>
+#include <QTimer>
 
 namespace Ui {
 class life;
@@ -34,7 +33,10 @@ private:
     //size_t border_x = max_sz; //to support resizing the window, we will keep track of the edges of the
     //size_t border_y = max_sz; //portion of the world being displayed
 
-    bool cells[max_sz][max_sz]; //the game world
+    bool cells[2][max_sz][max_sz]; //the game world
+    //we need two layers to the array because we need to keep the current generation to calculate the next
+
+    QTimer* timer; //the timer which will make the game run
 
     size_t getIndex(int c); //will take a coordinate and give the corresponding index of cells[][]
     int getCoord(size_t i); //will take an index of cells[][] and give the corresponding coordinate for drawing
