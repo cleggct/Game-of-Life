@@ -86,9 +86,9 @@ void life::nextGeneration(){
     }
 
     //now that we have calculated the next generation, we will set the current generation to the next
-    for(size_t i = 0; i < max_sz; ++i){
+    for(size_t i = 0; i < max_sz; ++i){ //iterate over all the cells
         for(size_t j = 0; j < max_sz; ++j){
-            cells[0][i][j] = cells[1][i][j];
+            cells[0][i][j] = cells[1][i][j]; //set the current generation to the next
         }
     }
 
@@ -123,4 +123,5 @@ int life::getCoord(size_t i){
 life::~life()
 {
     delete ui;
+    delete timer; //must deallocate the memory for the timer
 }
