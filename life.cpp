@@ -92,9 +92,9 @@ void life::nextGeneration(){
             cells[0][i][j] = cells[1][i][j]; //set the current generation to the next
         }
     }
+    }
 
     update(); //redraw the game
-    }
 }
 
 void life::paintEvent(QPaintEvent *event){
