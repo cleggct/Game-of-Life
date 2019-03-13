@@ -128,6 +128,14 @@ void life::keyPressEvent(QKeyEvent *event){
     }
 }
 
+void life::mousePressEvent(QMouseEvent *event){
+    if(event->button() == QMouseEvent::LeftButton){ //if the left mouse button is pressed
+        size_t i = getIndex(event->pos().x()); //get the indexes of the cell clicked on
+        size_t j = getIndex(event->pos().y());
+        cells[0][i][j] = !cells[0][i][j]; //change the state of the cell
+    }
+}
+
 size_t life::getIndex(int c){
     return (size_t) c / cell_sz; //compute the index corresponding to the given coordinate
 }
