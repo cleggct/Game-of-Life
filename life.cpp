@@ -113,10 +113,10 @@ void life::paintEvent(QPaintEvent *event){
 }
 
 void life::keyPressEvent(QKeyEvent *event){
-    if(event->key == Qt::Key_R){ //if the R key is pressed
+    if(event->key() == Qt::Key_R){ //if the R key is pressed
         randomize(); //randomize the world
     }
-    if(event->key == Qt::Key_C){ //if the C key is pressed
+    if(event->key() == Qt::Key_C){ //if the C key is pressed
         clear(); //clear the world
     }
 }
