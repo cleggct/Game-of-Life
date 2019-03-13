@@ -43,6 +43,7 @@ void life::randomize(){
 }
 
 void life::nextGeneration(){
+    if(!paused){ //don't do anything if the game is paused
     for(size_t i = 0; i < max_sz; ++i){ //iterate over all the cells
         for(size_t j = 0; j < max_sz; ++j){
             int total = 0; //initialize a total count of the living neighbors
@@ -93,6 +94,7 @@ void life::nextGeneration(){
     }
 
     update(); //redraw the game
+    }
 }
 
 void life::paintEvent(QPaintEvent *event){
@@ -118,6 +120,9 @@ void life::keyPressEvent(QKeyEvent *event){
     }
     if(event->key() == Qt::Key_C){ //if the C key is pressed
         clear(); //clear the world
+    }
+    if(event->key() == Qt::Key_Space){ //if the spacebar is pressed
+        paused = !paused; //change the value of paused
     }
 }
 

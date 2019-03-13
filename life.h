@@ -39,6 +39,7 @@ private:
     //we need two layers to the array because we need to keep the current generation to calculate the next
 
     QTimer* timer; //the timer which will make the game run
+    bool paused = false; //keep track of whether the game is paused
 
     size_t getIndex(int c); //will take a coordinate and give the corresponding index of cells[][]
     int getCoord(size_t i); //will take an index of cells[][] and give the corresponding coordinate for drawing
