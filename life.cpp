@@ -92,9 +92,9 @@ void life::nextGeneration(){
             cells[0][i][j] = cells[1][i][j]; //set the current generation to the next
         }
     }
-    }
 
     update(); //redraw the game
+    }
 }
 
 void life::paintEvent(QPaintEvent *event){
@@ -117,9 +117,11 @@ void life::paintEvent(QPaintEvent *event){
 void life::keyPressEvent(QKeyEvent *event){
     if(event->key() == Qt::Key_R){ //if the R key is pressed
         randomize(); //randomize the world
+        update(); //redraw
     }
     if(event->key() == Qt::Key_C){ //if the C key is pressed
         clear(); //clear the world
+        update(); //redraw
     }
     if(event->key() == Qt::Key_Space){ //if the spacebar is pressed
         paused = !paused; //change the value of paused
