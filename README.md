@@ -8,7 +8,7 @@
 
 3. Log
 
--
+
 
 ## 1. Description
 
@@ -22,7 +22,7 @@ In my implementation, the edges of the grid are stitched together to form a toro
 from the opposite edge.
 For more information about Conway's Game of Life, here is a link to the Wikipedia page: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
--
+
 
 ## 2. Controls
 
@@ -34,7 +34,7 @@ For more information about Conway's Game of Life, here is a link to the Wikipedi
 
 * Click on a cell to change its state
 
--
+
 
 ## 3. Log
 
