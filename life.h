@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPaintEvent>
 #include <QTimer>
+#include <QKeyEvent>
 
 namespace Ui {
 class life;
@@ -24,6 +25,7 @@ public slots:
 
 protected:
     void paintEvent(QPaintEvent *event); //the function for drawing the game
+    void keyPressEvent(QKeyEvent *event); //will allow us to use keyboard input
 
 private:
     Ui::life *ui;

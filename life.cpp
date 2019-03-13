@@ -112,6 +112,15 @@ void life::paintEvent(QPaintEvent *event){
     }
 }
 
+void life::keyPressEvent(QKeyEvent *event){
+    if(event->key == Qt::Key_R){ //if the R key is pressed
+        randomize(); //randomize the world
+    }
+    if(event->key == Qt::Key_C){ //if the C key is pressed
+        clear(); //clear the world
+    }
+}
+
 size_t life::getIndex(int c){
     return (size_t) c / cell_sz; //compute the index corresponding to the given coordinate
 }
