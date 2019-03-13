@@ -129,7 +129,7 @@ void life::keyPressEvent(QKeyEvent *event){
 }
 
 void life::mousePressEvent(QMouseEvent *event){
-    if(event->button() == QMouseEvent::LeftButton){ //if the left mouse button is pressed
+    if(event->button() == Qt::LeftButton){ //if the left mouse button is pressed
         size_t i = getIndex(event->pos().x()); //get the indexes of the cell clicked on
         size_t j = getIndex(event->pos().y());
         cells[0][i][j] = !cells[0][i][j]; //change the state of the cell
