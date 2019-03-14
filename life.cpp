@@ -105,10 +105,10 @@ void life::paintEvent(QPaintEvent *event){
         for(size_t j = 0; j < max_sz; ++j){
             QRectF cell(getCoord(i), getCoord(j), cell_sz, cell_sz); //calculate the rectangle to fill for the cell
             if(cells[0][i][j]){ //if the cell is living
-                paint.fillRect(cell, QBrush(living_color)); //paint living cells amber
+                paint.fillRect(cell, QBrush(living_color)); //paint living cells
             }
             else{ //the cell is not living
-                paint.fillRect(cell, QBrush(non_living_color)); //paint nonliving cells dark amber
+                paint.fillRect(cell, QBrush(non_living_color)); //paint nonliving cells
             }
         }
     }
