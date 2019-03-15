@@ -37,7 +37,7 @@ void life::randomize(){
     for(size_t i = 0; i < max_sz; ++i){ //iterate over all the cells
         for(size_t j = 0; j < max_sz; ++j){
             cells[current][i][j] = std::rand() % 2; //set the cell to a random value
-            cells[(current+1)%2][i][j] = 0; //just make the next generation empty for now
+            cells[current == 1 ? 0 : 1][i][j] = 0; //just make the next generation empty for now
         }
     }
 }
@@ -76,18 +76,18 @@ void life::nextGeneration(){
 
             if(cells[current][i][j]){ //if the current cell is living
                 if((total != 2) && (total != 3)){ //apply the rules
-                    cells[(current+1)%2][i][j] = 0; //edit the next generation
+                    cells[current == 1 ? 0 : 1][i][j] = 0; //edit the next generation
                 }
             } else{ //the current cell is nonliving
                 if(total == 3){ //apply the rules
-                    cells[(current+1)%2][i][j] = 1; //edit the next generation
+                    cells[current == 1 ? 0 : 1][i][j] = 1; //edit the next generation
                 }
             }
         }
     }
 
     //now that we have calculated the next generation, we will set the current generation to the next
-    current = (current+1)%2;
+    current = current == 1 ? 0 : 1;
 
     update(); //redraw the game
     }
@@ -129,7 +129,7 @@ void life::mousePressEvent(QMouseEvent *event){
         size_t i = getIndex(event->pos().x()); //get the indexes of the cell clicked on
         size_t j = getIndex(event->pos().y());
         cells[current][i][j] = !cells[current][i][j]; //change the state of the cell
-        cells[(current+1)%2][i][j] = cells[(current+1)%2][i][j]; //also change it in the next generation to be sure
+        cells[current == 1 ? 0 : 1][i][j] = cells[(current+1)%2][i][j]; //also change it in the next generation to be sure
         update();
     }
 }
