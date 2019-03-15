@@ -34,8 +34,7 @@ private:
     static const size_t max_sz = 100; //the max size of the widget
     static const size_t min_sz = 10; //the min size of the widget
     static const size_t cell_sz = 10; //the size of a cell when it is drawn
-    //size_t border_x = max_sz; //to support resizing the window, we will keep track of the edges of the
-    //size_t border_y = max_sz; //portion of the world being displayed
+    int current = 0; //keeps track of which of the double arrays in cells is being used for the current generation
 
     bool cells[2][max_sz][max_sz]; //the game world
     //we need two layers to the array because we need to keep the current generation to calculate the next

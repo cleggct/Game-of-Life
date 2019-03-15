@@ -36,8 +36,8 @@ void life::randomize(){
     std::srand(std::time(0)); //seed the random number generator
     for(size_t i = 0; i < max_sz; ++i){ //iterate over all the cells
         for(size_t j = 0; j < max_sz; ++j){
-            cells[0][i][j] = std::rand() % 2; //set the cell to a random value
-            cells[1][i][j] = 0; //just make the next generation empty for now
+            cells[current][i][j] = std::rand() % 2; //set the cell to a random value
+            cells[(current+1)%2][i][j] = 0; //just make the next generation empty for now
         }
     }
 }
@@ -49,49 +49,45 @@ void life::nextGeneration(){
             int total = 0; //initialize a total count of the living neighbors
 
             //count the number of living neighbors
-            if(cells[0][(i-1+max_sz)%max_sz][(j-1+max_sz)%max_sz]){ //we use these indexes to make the world wrap around at the edges
+            if(cells[current][(i-1+max_sz)%max_sz][(j-1+max_sz)%max_sz]){ //we use these indexes to make the world wrap around at the edges
                 ++total;
             }
-            if(cells[0][(i-1+max_sz)%max_sz][(j+max_sz)%max_sz]){
+            if(cells[current][(i-1+max_sz)%max_sz][(j+max_sz)%max_sz]){
                 ++total;
             }
-            if(cells[0][(i-1+max_sz)%max_sz][(j+1+max_sz)%max_sz]){
+            if(cells[current][(i-1+max_sz)%max_sz][(j+1+max_sz)%max_sz]){
                 ++total;
             }
-            if(cells[0][(i+max_sz)%max_sz][(j-1+max_sz)%max_sz]){
+            if(cells[current][(i+max_sz)%max_sz][(j-1+max_sz)%max_sz]){
                 ++total;
             }
-            if(cells[0][(i+max_sz)%max_sz][(j+1+max_sz)%max_sz]){
+            if(cells[current][(i+max_sz)%max_sz][(j+1+max_sz)%max_sz]){
                 ++total;
             }
-            if(cells[0][(i+1+max_sz)%max_sz][(j-1+max_sz)%max_sz]){
+            if(cells[current][(i+1+max_sz)%max_sz][(j-1+max_sz)%max_sz]){
                 ++total;
             }
-            if(cells[0][(i+1+max_sz)%max_sz][(j+max_sz)%max_sz]){
+            if(cells[current][(i+1+max_sz)%max_sz][(j+max_sz)%max_sz]){
                 ++total;
             }
-            if(cells[0][(i+1+max_sz)%max_sz][(j+1+max_sz)%max_sz]){
+            if(cells[current][(i+1+max_sz)%max_sz][(j+1+max_sz)%max_sz]){
                 ++total;
             }
 
-            if(cells[0][i][j]){ //if the current cell is living
+            if(cells[current][i][j]){ //if the current cell is living
                 if((total != 2) && (total != 3)){ //apply the rules
-                    cells[1][i][j] = 0;
+                    cells[(current+1)%2][i][j] = 0; //edit the next generation
                 }
             } else{ //the current cell is nonliving
                 if(total == 3){ //apply the rules
-                    cells[1][i][j] = 1;
+                    cells[(current+1)%2][i][j] = 1; //edit the next generation
                 }
             }
         }
     }
 
     //now that we have calculated the next generation, we will set the current generation to the next
-    for(size_t i = 0; i < max_sz; ++i){ //iterate over all the cells
-        for(size_t j = 0; j < max_sz; ++j){
-            cells[0][i][j] = cells[1][i][j]; //set the current generation to the next
-        }
-    }
+    current = (current+1)%2;
 
     update(); //redraw the game
     }
@@ -104,7 +100,7 @@ void life::paintEvent(QPaintEvent *event){
     for(size_t i = 0; i < max_sz; ++i){ //iterate over every cell
         for(size_t j = 0; j < max_sz; ++j){
             QRectF cell(getCoord(i), getCoord(j), cell_sz, cell_sz); //calculate the rectangle to fill for the cell
-            if(cells[0][i][j]){ //if the cell is living
+            if(cells[current][i][j]){ //if the cell is living
                 paint.fillRect(cell, QBrush(living_color)); //paint living cells
             }
             else{ //the cell is not living
@@ -132,8 +128,8 @@ void life::mousePressEvent(QMouseEvent *event){
     if(event->button() == Qt::LeftButton){ //if the left mouse button is pressed
         size_t i = getIndex(event->pos().x()); //get the indexes of the cell clicked on
         size_t j = getIndex(event->pos().y());
-        cells[0][i][j] = !cells[0][i][j]; //change the state of the cell
-        cells[1][i][j] = cells[0][i][j]; //also change it in the next generation to be sure
+        cells[current][i][j] = !cells[current][i][j]; //change the state of the cell
+        cells[(current+1)%2][i][j] = cells[(current+1)%2][i][j]; //also change it in the next generation to be sure
         update();
     }
 }
