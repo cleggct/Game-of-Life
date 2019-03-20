@@ -80,3 +80,15 @@ function gets the coordinates where the left mouse button is pressed and convert
 adjusts the value of the cell at that location. A subtle bug I experienced with this was that changing the value of the cell in only the current
 generation, not the next, could lead the game to behave incorrectly. This was easily fixed by making it so that the cell's state is changed in both
 the current and the next generation of the game. After this, I changed the colors of the game a bit to a scheme which I found more aesthetically pleasing.
+
+### 3/19/19
+I thought of a way to make the next generation function a bit more efficient. Before, I would have it so that the next generation would be computed based
+on the current, and then each of the current generation's cell's values would be changed to that of the corresponding cell in the next generation. This
+meant iterating over the whole (double) array once to calculate the next generation and then a second time to change everything over. I changed this by
+making it so that instead, the game simply changes the current generation to refer to the next generation after the next generation has been calculated,
+eliminating the need to iterate a second time over the double array and copy elements over. In order to implement these changes, I created an experimental
+branch so I could test things out without worrying about breaking the program. I was having a problem where the game wasn't behaving properly. It turned
+out the reason was that in the old method of calculating the next generation, I simply determined whether to change the state of a cell and did so. This
+was producing incorrect results with the new method of calculating the next generation because I could not assume that the next generation would resemble
+the current one. Instead I needed to determine exactly whether a cell in the next generation would be living or nonliving, not simply whether its state
+had changed. Once I made that fix, the program worked properly, so I went and merged the branches.
